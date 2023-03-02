@@ -36,11 +36,11 @@ public class TeacherDto extends PersonDto {
         this.teacherId = teacherId;
     }
 
-    public DepartmentDto getDepartmentDto() {
+    public DepartmentDto getDepartment() {
         return department;
     }
 
-    public void setDepartmentDto(DepartmentDto departmentDto) {
+    public void setDepartment(DepartmentDto departmentDto) {
         this.department = departmentDto;
     }
 }

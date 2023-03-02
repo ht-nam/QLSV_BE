@@ -5,10 +5,7 @@ import com.example.QLSV.repository.TeacherRepository;
 import com.example.QLSV.service.TeacherService;
 import com.example.QLSV.service.impl.TeacherServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -33,8 +30,8 @@ public class TeacherController {
         return teacherServiceImpl.save(teacherDto);
     }
 
-    @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
-    public boolean delete(@RequestBody long id) {
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
+    public boolean delete(@PathVariable("id") long id) {
         return teacherServiceImpl.delete(id);
     }
 }

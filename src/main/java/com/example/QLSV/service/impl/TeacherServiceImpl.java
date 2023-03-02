@@ -1,6 +1,8 @@
 package com.example.QLSV.service.impl;
 
+import com.example.QLSV.domain.Teacher;
 import com.example.QLSV.dto.TeacherDto;
+import com.example.QLSV.repository.DepartmentRepository;
 import com.example.QLSV.repository.TeacherRepository;
 import com.example.QLSV.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,9 @@ public class TeacherServiceImpl implements TeacherService {
     @Autowired
     private TeacherRepository teacherRepository;
 
+    @Autowired
+    private DepartmentRepository departmentRepository;
+
     @Override
     public List<TeacherDto> getAll() {
         return teacherRepository.getALl();
@@ -20,7 +25,9 @@ public class TeacherServiceImpl implements TeacherService {
 
     @Override
     public TeacherDto save(TeacherDto teacherDto) {
-        return new TeacherDto(teacherRepository.save(teacherDto.toTeacher()));
+        Teacher teacher = teacherRepository.save(teacherDto.toTeacher());
+        teacher.setDepartment(departmentRepository.findById(teacherDto.getDepartment().getId()).get());
+        return new TeacherDto(teacher);
     }
 
     @Override
