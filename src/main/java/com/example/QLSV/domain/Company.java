@@ -1,6 +1,7 @@
 package com.example.QLSV.domain;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_company")
@@ -18,13 +19,18 @@ public class Company {
     @Column(name = "address")
     private String address;
 
-    public Company(){}
+    @OneToMany(mappedBy = "company")
+    private Set<Intern> interns;
 
-    public Company(long id, String name, String code, String address) {
+    public Company() {
+    }
+
+    public Company(long id, String name, String code, String address, Set<Intern> interns) {
         this.id = id;
         this.name = name;
         this.code = code;
         this.address = address;
+        this.interns = interns;
     }
 
     public long getId() {
@@ -57,5 +63,13 @@ public class Company {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public Set<Intern> getInterns() {
+        return interns;
+    }
+
+    public void setInterns(Set<Intern> interns) {
+        this.interns = interns;
     }
 }

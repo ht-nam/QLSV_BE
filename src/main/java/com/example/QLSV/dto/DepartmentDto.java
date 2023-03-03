@@ -15,11 +15,7 @@ public class DepartmentDto {
         id = department.getId();
         name = department.getName();
         code = department.getCode();
-        if (department.getDepartment() != null) {
-            this.department = new DepartmentDto(department.getDepartment());
-        } else {
-            this.department = null;
-        }
+        this.department = department.getDepartment() == null ? null : new DepartmentDto(department.getDepartment());
     }
 
     public DepartmentDto(long id, String name, String code, DepartmentDto department) {

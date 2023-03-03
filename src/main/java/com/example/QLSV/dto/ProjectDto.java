@@ -3,11 +3,15 @@ package com.example.QLSV.dto;
 
 import com.example.QLSV.domain.Project;
 
+import java.util.Set;
+import java.util.stream.Collectors;
+
 public class ProjectDto {
     private long id;
     private String name;
     private String code;
     private TeacherDto teacher;
+    private Set<StudentProjectDto> studentProjects;
 
     public ProjectDto() {
     }
@@ -16,14 +20,20 @@ public class ProjectDto {
         id = project.getId();
         name = project.getName();
         code = project.getCode();
-        teacher = new TeacherDto(project.getTeacher());
+        teacher = project.getTeacher() == null ? null : new TeacherDto(project.getTeacher());
+        if (project.getStudentProjects() == null || project.getStudentProjects().size() == 0) {
+            studentProjects = null;
+        } else {
+            studentProjects = project.getStudentProjects().stream().map(e -> new StudentProjectDto(e)).collect(Collectors.toSet());
+        }
     }
 
-    public ProjectDto(long id, String name, String code, TeacherDto teacher) {
+    public ProjectDto(long id, String name, String code, TeacherDto teacher, Set<StudentProjectDto> studentProjects) {
         this.id = id;
         this.name = name;
         this.code = code;
         this.teacher = teacher;
+        this.studentProjects = studentProjects;
     }
 
     public Project toProject() {
@@ -62,5 +72,13 @@ public class ProjectDto {
 
     public void setTeacher(TeacherDto teacher) {
         this.teacher = teacher;
+    }
+
+    public Set<StudentProjectDto> getStudentProjects() {
+        return studentProjects;
+    }
+
+    public void setStudentProjects(Set<StudentProjectDto> studentProjects) {
+        this.studentProjects = studentProjects;
     }
 }

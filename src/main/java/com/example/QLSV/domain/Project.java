@@ -1,6 +1,7 @@
 package com.example.QLSV.domain;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_project")
@@ -18,6 +19,9 @@ public class Project {
     @ManyToOne
     @JoinColumn(name = "teacher_id", nullable = false)
     private Teacher teacher;
+
+    @OneToMany(mappedBy = "project")
+    private Set<StudentProject> studentProjects;
 
     public Project() {
     }
@@ -59,5 +63,13 @@ public class Project {
 
     public void setTeacher(Teacher teacher) {
         this.teacher = teacher;
+    }
+
+    public Set<StudentProject> getStudentProjects() {
+        return studentProjects;
+    }
+
+    public void setStudentProjects(Set<StudentProject> studentProjects) {
+        this.studentProjects = studentProjects;
     }
 }

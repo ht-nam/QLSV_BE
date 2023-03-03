@@ -28,6 +28,7 @@ public class ProjectServiceImpl implements ProjectService {
         if (projectDto.getTeacher() != null) {
             project.setTeacher(teacherRepository.findById(projectDto.getTeacher().getId()).get());
         }
+        projectDto.setStudentProjects(null);
         return new ProjectDto(project);
     }
 
