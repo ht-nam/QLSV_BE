@@ -21,25 +21,25 @@ public class StudentDto extends PersonDto {
         year = student.getYear();
         personId = student.getPerson_id();
 
-        if (student.getStudentProjects() == null || student.getStudentProjects().size() == 0) {
+        if (student.getStudentProjects() == null) {
             studentProjects = null;
         } else {
-            studentProjects = student.getStudentProjects().stream().map(e -> new StudentProjectDto(e)).collect(Collectors.toSet());
+            studentProjects = student.getStudentProjects().stream().map(e -> new StudentProjectDto(e, false, false)).collect(Collectors.toSet());
         }
 
-        if (student.getInterns() == null || student.getInterns().size() == 0) {
+        if (student.getInterns() == null) {
             interns = null;
         } else {
-            interns = student.getInterns().stream().map(e -> new InternDto(e)).collect(Collectors.toSet());
+            interns = student.getInterns().stream().map(e -> new InternDto(e, false, false, false)).collect(Collectors.toSet());
         }
     }
 
     public Student toStudent() {
         Student student = new Student(getId(), getName(), getCode(), getAddress(), getGender(), getBirthday(), getYear(), getPersonId(), null, null);
-        if (studentProjects != null && studentProjects.size() != 0) {
+        if (studentProjects != null) {
             student.setStudentProjects(studentProjects.stream().map(e -> e.toStudentProject()).collect(Collectors.toSet()));
         }
-        if (interns != null && interns.size() != 0) {
+        if (interns != null) {
             student.setInterns(interns.stream().map(e -> e.toIntern()).collect(Collectors.toSet()));
         }
         return student;

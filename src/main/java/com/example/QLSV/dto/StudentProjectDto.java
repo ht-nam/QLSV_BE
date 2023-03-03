@@ -6,8 +6,8 @@ import java.util.Date;
 
 public class StudentProjectDto {
     private long id;
-    private ProjectDto projectDto;
-    private StudentDto studentDto;
+    private ProjectDto project;
+    private StudentDto student;
     private double mark;
     private Date startDate;
     private Date endDate;
@@ -17,17 +17,26 @@ public class StudentProjectDto {
 
     public StudentProjectDto(StudentProject studentProject) {
         id = studentProject.getId();
-        projectDto = studentProject.getProject() == null ? null : new ProjectDto(studentProject.getProject());
-        studentDto = studentProject.getStudent() == null ? null : new StudentDto(studentProject.getStudent());
+        project = studentProject.getProject() == null ? null : new ProjectDto(studentProject.getProject());
+        student = studentProject.getStudent() == null ? null : new StudentDto(studentProject.getStudent());
         mark = studentProject.getMark();
         startDate = studentProject.getStartDate();
         endDate = studentProject.getEndDate();
     }
 
-    public StudentProjectDto(long id, ProjectDto projectDto, StudentDto studentDto, double mark, Date startDate, Date endDate) {
+    public StudentProjectDto(StudentProject studentProject, boolean haveProject, boolean haveStudent) {
+        id = studentProject.getId();
+        project = studentProject.getProject() == null || haveStudent == false ? null : new ProjectDto(studentProject.getProject());
+        student = studentProject.getStudent() == null || haveStudent == false ? null : new StudentDto(studentProject.getStudent());
+        mark = studentProject.getMark();
+        startDate = studentProject.getStartDate();
+        endDate = studentProject.getEndDate();
+    }
+
+    public StudentProjectDto(long id, ProjectDto project, StudentDto student, double mark, Date startDate, Date endDate) {
         this.id = id;
-        this.projectDto = projectDto;
-        this.studentDto = studentDto;
+        this.project = project;
+        this.student = student;
         this.mark = mark;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -35,8 +44,8 @@ public class StudentProjectDto {
 
     public StudentProject toStudentProject() {
         StudentProject studentProject = new StudentProject(id, null, null, mark, startDate, endDate);
-        studentProject.setProject(projectDto == null ? null : projectDto.toProject());
-        studentProject.setStudent(studentDto == null ? null : studentDto.toStudent());
+        studentProject.setProject(project == null ? null : project.toProject());
+        studentProject.setStudent(student == null ? null : student.toStudent());
         return studentProject;
     }
 
@@ -48,20 +57,20 @@ public class StudentProjectDto {
         this.id = id;
     }
 
-    public ProjectDto getProjectDto() {
-        return projectDto;
+    public ProjectDto getProject() {
+        return project;
     }
 
-    public void setProjectDto(ProjectDto projectDto) {
-        this.projectDto = projectDto;
+    public void setProject(ProjectDto project) {
+        this.project = project;
     }
 
-    public StudentDto getStudentDto() {
-        return studentDto;
+    public StudentDto getStudent() {
+        return student;
     }
 
-    public void setStudentDto(StudentDto studentDto) {
-        this.studentDto = studentDto;
+    public void setStudent(StudentDto student) {
+        this.student = student;
     }
 
     public double getMark() {

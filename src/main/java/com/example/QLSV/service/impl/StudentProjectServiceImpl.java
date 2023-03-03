@@ -6,7 +6,6 @@ import com.example.QLSV.repository.ProjectRepository;
 import com.example.QLSV.repository.StudentProjectRepository;
 import com.example.QLSV.repository.StudentRepository;
 import com.example.QLSV.service.StudentProjectService;
-import com.example.QLSV.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,8 +29,8 @@ public class StudentProjectServiceImpl implements StudentProjectService {
     @Override
     public StudentProjectDto save(StudentProjectDto studentProjectDto) {
         StudentProject studentProject = studentProjectRepository.save(studentProjectDto.toStudentProject());
-        studentProject.setProject(projectRepository.findById(studentProjectDto.getProjectDto().getId()).get());
-        studentProject.setStudent(studentRepository.findById(studentProjectDto.getStudentDto().getId()).get());
+        studentProject.setProject(projectRepository.findById(studentProjectDto.getProject().getId()).get());
+        studentProject.setStudent(studentRepository.findById(studentProjectDto.getStudent().getId()).get());
         return new StudentProjectDto(studentProject);
     }
 

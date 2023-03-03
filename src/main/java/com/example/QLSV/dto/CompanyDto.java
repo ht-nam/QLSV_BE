@@ -31,8 +31,8 @@ public class CompanyDto {
         this.name = company.getName();
         this.code = company.getCode();
         this.address = company.getAddress();
-        if (company.getInterns() != null || company.getInterns().size() == 0) {
-            this.interns = company.getInterns().stream().map(e -> new InternDto(e)).collect(Collectors.toSet());
+        if (company.getInterns() != null) {
+            this.interns = company.getInterns().stream().map(e -> new InternDto(e, false, false, false)).collect(Collectors.toSet());
         } else {
             this.interns = null;
         }
@@ -40,7 +40,7 @@ public class CompanyDto {
 
     public Company toCompany() {
         Set<Intern> itns = new HashSet<>();
-        if (interns == null || interns.size() == 0) {
+        if (interns == null) {
             itns = null;
         } else {
             itns = interns.stream().map(e -> e.toIntern()).collect(Collectors.toSet());

@@ -14,7 +14,7 @@ public class Teacher extends Person {
     @JoinColumn(name = "department_id", nullable = false)
     private Department department;
 
-    @OneToMany(mappedBy = "teacher")
+    @OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL)
     private Set<Intern> interns;
 
     public Teacher() {

@@ -18,17 +18,17 @@ public class TeacherDto extends PersonDto {
         super(teacher);
         teacherId = teacher.getTeacherId();
         department = teacher.getDepartment() == null ? null : new DepartmentDto(teacher.getDepartment());
-        if (teacher.getInterns() == null || teacher.getInterns().size() == 0) {
+        if (teacher.getInterns() == null) {
             interns = null;
         } else {
-            interns = teacher.getInterns().stream().map(e -> new InternDto(e)).collect(Collectors.toSet());
+            interns = teacher.getInterns().stream().map(e -> new InternDto(e, false, false, false)).collect(Collectors.toSet());
         }
     }
 
     public Teacher toTeacher() {
         Teacher teacher = new Teacher(getId(), getName(), getCode(), getAddress(), getGender(), getBirthday(), getTeacherId(), null, null);
         teacher.setDepartment(department == null ? null : department.toDepartment());
-        if (interns != null && interns.size() != 0) {
+        if (interns != null) {
             teacher.setInterns(interns.stream().map(e -> e.toIntern()).collect(Collectors.toSet()));
         }
         return teacher;

@@ -3,10 +3,7 @@ package com.example.QLSV.controller;
 import com.example.QLSV.dto.StudentDto;
 import com.example.QLSV.service.impl.StudentServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,12 +19,12 @@ public class StudentController {
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public StudentDto save(StudentDto studentDto) {
+    public StudentDto save(@RequestBody StudentDto studentDto) {
         return studentService.save(studentDto);
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.PUT)
-    public StudentDto update(StudentDto studentDto) {
+    public StudentDto update(@RequestBody StudentDto studentDto) {
         return studentService.save(studentDto);
     }
 

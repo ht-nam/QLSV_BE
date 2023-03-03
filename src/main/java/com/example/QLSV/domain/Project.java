@@ -20,7 +20,7 @@ public class Project {
     @JoinColumn(name = "teacher_id", nullable = false)
     private Teacher teacher;
 
-    @OneToMany(mappedBy = "project")
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
     private Set<StudentProject> studentProjects;
 
     public Project() {

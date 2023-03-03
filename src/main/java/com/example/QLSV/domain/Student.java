@@ -14,10 +14,10 @@ public class Student extends Person {
     @Column(name = "person_id")
     private long person_id;
 
-    @OneToMany(mappedBy = "student")
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
     private Set<StudentProject> studentProjects;
 
-    @OneToMany(mappedBy = "student")
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
     private Set<Intern> interns;
 
     public Student() {

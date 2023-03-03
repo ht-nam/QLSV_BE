@@ -21,10 +21,10 @@ public class ProjectDto {
         name = project.getName();
         code = project.getCode();
         teacher = project.getTeacher() == null ? null : new TeacherDto(project.getTeacher());
-        if (project.getStudentProjects() == null || project.getStudentProjects().size() == 0) {
+        if (project.getStudentProjects() == null) {
             studentProjects = null;
         } else {
-            studentProjects = project.getStudentProjects().stream().map(e -> new StudentProjectDto(e)).collect(Collectors.toSet());
+            studentProjects = project.getStudentProjects().stream().map(e -> new StudentProjectDto(e, false, false)).collect(Collectors.toSet());
         }
     }
 

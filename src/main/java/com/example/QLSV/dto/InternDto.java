@@ -27,6 +27,16 @@ public class InternDto {
         endDate = intern.getEndDate();
     }
 
+    public InternDto(Intern intern, boolean haveStudent, boolean haveCompany, boolean haveTeacher) {
+        id = intern.getId();
+        student = intern.getStudent() == null || haveStudent == false ? null : new StudentDto(intern.getStudent());
+        company = intern.getCompany() == null || haveCompany == false ? null : new CompanyDto(intern.getCompany());
+        teacher = intern.getTeacher() == null || haveTeacher == false ? null : new TeacherDto(intern.getTeacher());
+        mark = intern.getMark();
+        startDate = intern.getStartDate();
+        endDate = intern.getEndDate();
+    }
+
     public InternDto(long id, StudentDto student, CompanyDto company, TeacherDto teacher, double mark, Date startDate, Date endDate) {
         this.id = id;
         this.student = student;

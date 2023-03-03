@@ -19,7 +19,7 @@ public class Company {
     @Column(name = "address")
     private String address;
 
-    @OneToMany(mappedBy = "company")
+    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
     private Set<Intern> interns;
 
     public Company() {
