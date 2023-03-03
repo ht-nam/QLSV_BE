@@ -16,15 +16,8 @@ public class TeacherDto extends PersonDto {
     }
 
     public Teacher toTeacher() {
-        Teacher teacher = new Teacher();
-        teacher.setId(getId());
-        teacher.setName(getName());
-        teacher.setCode(getCode());
-        teacher.setAddress(getAddress());
-        teacher.setGender(getGender());
-        teacher.setBirthday(getBirthday());
-        teacher.setTeacherId(teacherId);
-        teacher.setDepartment(department.toDepartment());
+        Teacher teacher = new Teacher(getId(), getName(), getCode(), getAddress(), getGender(), getBirthday(), getTeacherId(), null);
+        teacher.setDepartment(department == null ? null : department.toDepartment());
         return teacher;
     }
 

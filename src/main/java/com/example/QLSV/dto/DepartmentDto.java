@@ -30,11 +30,7 @@ public class DepartmentDto {
     }
 
     public Department toDepartment() {
-        if (department != null) {
-            return new Department(id, name, code, department.toDepartment());
-        } else {
-            return new Department(id, name, code, null);
-        }
+        return new Department(id, name, code, department == null ? null : department.toDepartment());
     }
 
     public long getId() {
