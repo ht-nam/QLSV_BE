@@ -23,13 +23,18 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
+    public ProjectDto getById(long id) {
+        return new ProjectDto(projectRepository.findById(id).get(), true);
+    }
+
+    @Override
     public ProjectDto save(ProjectDto projectDto) {
         Project project = projectRepository.save(projectDto.toProject());
         if (projectDto.getTeacher() != null) {
             project.setTeacher(teacherRepository.findById(projectDto.getTeacher().getId()).get());
         }
         projectDto.setStudentProjects(null);
-        return new ProjectDto(project);
+        return new ProjectDto(project, true);
     }
 
     @Override

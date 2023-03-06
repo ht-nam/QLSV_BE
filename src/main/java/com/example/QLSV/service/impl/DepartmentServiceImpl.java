@@ -20,6 +20,11 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
+    public DepartmentDto getById(long id) {
+        return new DepartmentDto(departmentRepository.findById(id).get(), true);
+    }
+
+    @Override
     public boolean delete(long id) {
         try {
             departmentRepository.deleteById(id);
@@ -32,12 +37,12 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Override
     public DepartmentDto save(DepartmentDto departmentDto) {
         if (departmentDto.getDepartment() != null) {
-            DepartmentDto department = new DepartmentDto(departmentRepository.save(departmentDto.toDepartment()));
-            DepartmentDto father = new DepartmentDto(departmentRepository.findById(departmentDto.getDepartment().getId()).get());
+            DepartmentDto department = new DepartmentDto(departmentRepository.save(departmentDto.toDepartment()), true);
+            DepartmentDto father = new DepartmentDto(departmentRepository.findById(departmentDto.getDepartment().getId()).get(), true);
             department.setDepartment(father);
             return department;
         } else {
-            return new DepartmentDto(departmentRepository.save(departmentDto.toDepartment()));
+            return new DepartmentDto(departmentRepository.save(departmentDto.toDepartment()), true);
         }
     }
 

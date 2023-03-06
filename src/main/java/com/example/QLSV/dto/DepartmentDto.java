@@ -15,14 +15,14 @@ public class DepartmentDto {
         id = department.getId();
         name = department.getName();
         code = department.getCode();
-        this.department = department.getDepartment() == null ? null : new DepartmentDto(department.getDepartment());
+        this.department = null;
     }
 
-    public DepartmentDto(long id, String name, String code, DepartmentDto department) {
-        this.id = id;
-        this.name = name;
-        this.code = code;
-        this.department = department;
+    public DepartmentDto(Department department, boolean isFullField) {
+        id = department.getId();
+        name = department.getName();
+        code = department.getCode();
+        this.department = department.getDepartment() == null || !isFullField ? null : new DepartmentDto(department.getDepartment(), true);
     }
 
     public Department toDepartment() {

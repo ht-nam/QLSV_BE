@@ -14,6 +14,8 @@ import java.util.List;
 public interface DepartmentService {
     public List<DepartmentDto> getAll();
 
+    public DepartmentDto getById(long id);
+
     public DepartmentDto save(DepartmentDto departmentDto);
 
     public boolean delete(long id);

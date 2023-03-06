@@ -27,11 +27,16 @@ public class StudentProjectServiceImpl implements StudentProjectService {
     }
 
     @Override
+    public StudentProjectDto getById(long id) {
+        return new StudentProjectDto(studentProjectRepository.findById(id).get(), true);
+    }
+
+    @Override
     public StudentProjectDto save(StudentProjectDto studentProjectDto) {
         StudentProject studentProject = studentProjectRepository.save(studentProjectDto.toStudentProject());
         studentProject.setProject(projectRepository.findById(studentProjectDto.getProject().getId()).get());
         studentProject.setStudent(studentRepository.findById(studentProjectDto.getStudent().getId()).get());
-        return new StudentProjectDto(studentProject);
+        return new StudentProjectDto(studentProject, true);
     }
 
     @Override

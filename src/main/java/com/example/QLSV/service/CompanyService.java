@@ -8,6 +8,8 @@ import java.util.List;
 public interface CompanyService {
     public List<CompanyDto> getAll();
 
+    public CompanyDto getById(long id);
+
     public CompanyDto save(CompanyDto companyDto);
 
     public boolean delete(long id);

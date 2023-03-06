@@ -19,32 +19,23 @@ public class InternDto {
 
     public InternDto(Intern intern) {
         id = intern.getId();
-        student = intern.getStudent() == null ? null : new StudentDto(intern.getStudent());
-        company = intern.getCompany() == null ? null : new CompanyDto(intern.getCompany());
-        teacher = intern.getTeacher() == null ? null : new TeacherDto(intern.getTeacher());
+        student = null;
+        company = null;
+        teacher = null;
         mark = intern.getMark();
         startDate = intern.getStartDate();
         endDate = intern.getEndDate();
     }
 
-    public InternDto(Intern intern, boolean haveStudent, boolean haveCompany, boolean haveTeacher) {
+    public InternDto(Intern intern, boolean isFullField) {
         id = intern.getId();
-        student = intern.getStudent() == null || haveStudent == false ? null : new StudentDto(intern.getStudent());
-        company = intern.getCompany() == null || haveCompany == false ? null : new CompanyDto(intern.getCompany());
-        teacher = intern.getTeacher() == null || haveTeacher == false ? null : new TeacherDto(intern.getTeacher());
         mark = intern.getMark();
         startDate = intern.getStartDate();
         endDate = intern.getEndDate();
-    }
 
-    public InternDto(long id, StudentDto student, CompanyDto company, TeacherDto teacher, double mark, Date startDate, Date endDate) {
-        this.id = id;
-        this.student = student;
-        this.company = company;
-        this.teacher = teacher;
-        this.mark = mark;
-        this.startDate = startDate;
-        this.endDate = endDate;
+        student = intern.getStudent() == null || !isFullField ? null : new StudentDto(intern.getStudent(), false);
+        company = intern.getCompany() == null || !isFullField ? null : new CompanyDto(intern.getCompany(), false);
+        teacher = intern.getTeacher() == null || !isFullField ? null : new TeacherDto(intern.getTeacher(), false);
     }
 
     public Intern toIntern() {

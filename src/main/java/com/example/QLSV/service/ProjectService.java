@@ -7,6 +7,8 @@ import java.util.List;
 public interface ProjectService {
     public List<ProjectDto> getAll();
 
+    public ProjectDto getById(long id);
+
     public ProjectDto save(ProjectDto projectDto);
 
     public boolean delete(long id);

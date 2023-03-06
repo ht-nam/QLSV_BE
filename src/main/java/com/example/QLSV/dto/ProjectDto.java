@@ -20,21 +20,29 @@ public class ProjectDto {
         id = project.getId();
         name = project.getName();
         code = project.getCode();
-        teacher = project.getTeacher() == null ? null : new TeacherDto(project.getTeacher());
-        if (project.getStudentProjects() == null) {
+        teacher = null;
+        studentProjects = null;
+    }
+
+    public ProjectDto(Project project, boolean isFullField) {
+        id = project.getId();
+        name = project.getName();
+        code = project.getCode();
+        teacher = project.getTeacher() == null || !isFullField ? null : new TeacherDto(project.getTeacher(), false);
+        if (project.getStudentProjects() == null || !isFullField) {
             studentProjects = null;
         } else {
-            studentProjects = project.getStudentProjects().stream().map(e -> new StudentProjectDto(e, false, false)).collect(Collectors.toSet());
+            studentProjects = project.getStudentProjects().stream().map(e -> new StudentProjectDto(e, false)).collect(Collectors.toSet());
         }
     }
 
-    public ProjectDto(long id, String name, String code, TeacherDto teacher, Set<StudentProjectDto> studentProjects) {
-        this.id = id;
-        this.name = name;
-        this.code = code;
-        this.teacher = teacher;
-        this.studentProjects = studentProjects;
-    }
+//    public ProjectDto(long id, String name, String code, TeacherDto teacher, Set<StudentProjectDto> studentProjects) {
+//        this.id = id;
+//        this.name = name;
+//        this.code = code;
+//        this.teacher = teacher;
+//        this.studentProjects = studentProjects;
+//    }
 
     public Project toProject() {
         Project project = new Project(id, name, code, null);

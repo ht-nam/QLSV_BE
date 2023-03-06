@@ -10,6 +10,8 @@ import java.util.List;
 public interface TeacherService {
     public List<TeacherDto> getAll();
 
+    public TeacherDto getById(long id);
+
     public TeacherDto save(TeacherDto teacherDto);
 
     public boolean delete(long id);

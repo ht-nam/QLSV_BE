@@ -28,11 +28,16 @@ public class TeacherServiceImpl implements TeacherService {
     }
 
     @Override
+    public TeacherDto getById(long id) {
+        return new TeacherDto(teacherRepository.findById(id).get(), true);
+    }
+
+    @Override
     public TeacherDto save(TeacherDto teacherDto) {
         Teacher teacher = teacherRepository.save(teacherDto.toTeacher());
         teacher.setDepartment(departmentRepository.findById(teacherDto.getDepartment().getId()).get());
         teacher.setInterns(null);
-        return new TeacherDto(teacher);
+        return new TeacherDto(teacher, true);
     }
 
     @Override

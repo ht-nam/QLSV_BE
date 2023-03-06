@@ -20,6 +20,11 @@ public class DepartmentController {
         return departmentServiceImp.getAll();
     }
 
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public DepartmentDto getById(@PathVariable("id") long id) {
+        return departmentServiceImp.getById(id);
+    }
+
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public DepartmentDto save(@RequestBody DepartmentDto departmentDto) {
         return departmentServiceImp.save(departmentDto);

@@ -18,6 +18,11 @@ public class ProjectController {
         return projectServiceImpl.getAll();
     }
 
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public ProjectDto getById(@PathVariable long id) {
+        return projectServiceImpl.getById(id);
+    }
+
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public ProjectDto save(@RequestBody ProjectDto projectDto) {
         return projectServiceImpl.save(projectDto);

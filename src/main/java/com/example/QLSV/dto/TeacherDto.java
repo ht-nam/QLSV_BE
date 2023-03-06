@@ -17,11 +17,18 @@ public class TeacherDto extends PersonDto {
     public TeacherDto(Teacher teacher) {
         super(teacher);
         teacherId = teacher.getTeacherId();
-        department = teacher.getDepartment() == null ? null : new DepartmentDto(teacher.getDepartment());
-        if (teacher.getInterns() == null) {
+        department = null;
+        interns = null;
+    }
+
+    public TeacherDto(Teacher teacher, boolean isFullField) {
+        super(teacher);
+        teacherId = teacher.getTeacherId();
+        department = teacher.getDepartment() == null || !isFullField ? null : new DepartmentDto(teacher.getDepartment(), false);
+        if (teacher.getInterns() == null || !isFullField) {
             interns = null;
         } else {
-            interns = teacher.getInterns().stream().map(e -> new InternDto(e, false, false, false)).collect(Collectors.toSet());
+            interns = teacher.getInterns().stream().map(e -> new InternDto(e, false)).collect(Collectors.toSet());
         }
     }
 

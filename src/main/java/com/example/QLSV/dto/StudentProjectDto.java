@@ -17,29 +17,20 @@ public class StudentProjectDto {
 
     public StudentProjectDto(StudentProject studentProject) {
         id = studentProject.getId();
-        project = studentProject.getProject() == null ? null : new ProjectDto(studentProject.getProject());
-        student = studentProject.getStudent() == null ? null : new StudentDto(studentProject.getStudent());
+        project = null;
+        student = null;
         mark = studentProject.getMark();
         startDate = studentProject.getStartDate();
         endDate = studentProject.getEndDate();
     }
 
-    public StudentProjectDto(StudentProject studentProject, boolean haveProject, boolean haveStudent) {
+    public StudentProjectDto(StudentProject studentProject, boolean isFullField) {
         id = studentProject.getId();
-        project = studentProject.getProject() == null || haveStudent == false ? null : new ProjectDto(studentProject.getProject());
-        student = studentProject.getStudent() == null || haveStudent == false ? null : new StudentDto(studentProject.getStudent());
+        project = studentProject.getProject() == null || !isFullField ? null : new ProjectDto(studentProject.getProject(), false);
+        student = studentProject.getStudent() == null || !isFullField ? null : new StudentDto(studentProject.getStudent(), false);
         mark = studentProject.getMark();
         startDate = studentProject.getStartDate();
         endDate = studentProject.getEndDate();
-    }
-
-    public StudentProjectDto(long id, ProjectDto project, StudentDto student, double mark, Date startDate, Date endDate) {
-        this.id = id;
-        this.project = project;
-        this.student = student;
-        this.mark = mark;
-        this.startDate = startDate;
-        this.endDate = endDate;
     }
 
     public StudentProject toStudentProject() {

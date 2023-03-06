@@ -18,6 +18,11 @@ public class CompanyController {
         return companyService.getAll();
     }
 
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public CompanyDto getById(@PathVariable long id) {
+        return companyService.getById(id);
+    }
+
     @RequestMapping(value = "/getAll/{pageNo}/{pageSize}/{sortBy}", method = RequestMethod.GET)
     public List<CompanyDto> paging(@PathVariable("pageNo") int pageNo, @PathVariable("pageSize") int pageSize, @PathVariable("sortBy") String sortBy) {
         return companyService.paging(pageNo, pageSize, sortBy);
@@ -28,8 +33,9 @@ public class CompanyController {
         return companyService.save(companyDto);
     }
 
-    @RequestMapping(value = "/update", method = RequestMethod.PUT)
-    public CompanyDto update(@RequestBody CompanyDto companyDto) {
+    @RequestMapping(value = "/update/{id}", method = RequestMethod.PUT)
+    public CompanyDto update(@PathVariable long id, @RequestBody CompanyDto companyDto) {
+        companyDto.setId(id);
         return companyService.save(companyDto);
     }
 

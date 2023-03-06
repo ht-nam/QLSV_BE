@@ -30,12 +30,17 @@ public class InternServiceImpl implements InternService {
     }
 
     @Override
+    public InternDto getById(long id) {
+        return new InternDto(internRepository.findById(id).get(), true);
+    }
+
+    @Override
     public InternDto save(InternDto internDto) {
         Intern intern = internRepository.save(internDto.toIntern());
         intern.setTeacher(teacherRepository.findById(internDto.getTeacher().getId()).get());
         intern.setStudent(studentRepository.findById(internDto.getStudent().getId()).get());
         intern.setCompany(companyRepository.findById(internDto.getCompany().getId()).get());
-        return new InternDto(intern);
+        return new InternDto(intern, true);
     }
 
     @Override

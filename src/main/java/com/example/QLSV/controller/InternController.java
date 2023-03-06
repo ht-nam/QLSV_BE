@@ -18,6 +18,11 @@ public class InternController {
         return internService.getAll();
     }
 
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public InternDto getById(@PathVariable("id") long id) {
+        return internService.getById(id);
+    }
+
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public InternDto save(@RequestBody InternDto internDto) {
         return internService.save(internDto);

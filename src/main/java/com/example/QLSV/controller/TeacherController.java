@@ -20,6 +20,11 @@ public class TeacherController {
         return teacherServiceImpl.getAll();
     }
 
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public TeacherDto getById(@PathVariable("id") long id) {
+        return teacherServiceImpl.getById(id);
+    }
+
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public TeacherDto save(@RequestBody TeacherDto teacherDto) {
         return teacherServiceImpl.save(teacherDto);

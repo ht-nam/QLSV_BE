@@ -20,17 +20,25 @@ public class StudentDto extends PersonDto {
         super(student);
         year = student.getYear();
         personId = student.getPerson_id();
+        studentProjects = null;
+        interns = null;
+    }
+
+    public StudentDto(Student student, boolean isFullField) {
+        super(student);
+        year = student.getYear();
+        personId = student.getPerson_id();
 
         if (student.getStudentProjects() == null) {
             studentProjects = null;
         } else {
-            studentProjects = student.getStudentProjects().stream().map(e -> new StudentProjectDto(e, false, false)).collect(Collectors.toSet());
+            studentProjects = student.getStudentProjects().stream().map(e -> new StudentProjectDto(e, false)).collect(Collectors.toSet());
         }
 
         if (student.getInterns() == null) {
             interns = null;
         } else {
-            interns = student.getInterns().stream().map(e -> new InternDto(e, false, false, false)).collect(Collectors.toSet());
+            interns = student.getInterns().stream().map(e -> new InternDto(e, false)).collect(Collectors.toSet());
         }
     }
 

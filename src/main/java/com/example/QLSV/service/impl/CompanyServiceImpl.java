@@ -27,8 +27,13 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
+    public CompanyDto getById(long id) {
+        return new CompanyDto(companyRepository.findById(id).get(), true);
+    }
+
+    @Override
     public CompanyDto save(CompanyDto companyDto) {
-        return new CompanyDto(companyRepository.save(companyDto.toCompany()));
+        return new CompanyDto(companyRepository.save(companyDto.toCompany()), true);
     }
 
     @Override
@@ -46,7 +51,7 @@ public class CompanyServiceImpl implements CompanyService {
         Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
         Page<Company> pageResult = companyRepository.findAll(paging);
         if (pageResult.hasContent()) {
-            return pageResult.getContent().stream().map(e -> new CompanyDto(e)).collect(Collectors.toList());
+            return pageResult.getContent().stream().map(e -> new CompanyDto(e, false)).collect(Collectors.toList());
         } else {
             return new ArrayList<CompanyDto>();
         }

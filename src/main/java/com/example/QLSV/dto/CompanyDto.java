@@ -18,23 +18,22 @@ public class CompanyDto {
     public CompanyDto() {
     }
 
-    public CompanyDto(long id, String name, String code, String address, Set<InternDto> interns) {
-        this.id = id;
-        this.name = name;
-        this.code = code;
-        this.address = address;
-        this.interns = interns;
-    }
-
     public CompanyDto(Company company) {
         this.id = company.getId();
         this.name = company.getName();
         this.code = company.getCode();
         this.address = company.getAddress();
-        if (company.getInterns() != null) {
-            this.interns = company.getInterns().stream().map(e -> new InternDto(e, false, false, false)).collect(Collectors.toSet());
-        } else {
-            this.interns = null;
+        this.interns = null;
+    }
+
+    public CompanyDto(Company company, boolean isFullField) {
+        this.id = company.getId();
+        this.name = company.getName();
+        this.code = company.getCode();
+        this.address = company.getAddress();
+        this.interns = null;
+        if (isFullField && company.getInterns() != null) {
+            this.interns = company.getInterns().stream().map(e -> new InternDto(e, false)).collect(Collectors.toSet());
         }
     }
 
